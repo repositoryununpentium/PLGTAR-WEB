@@ -8,3 +8,13 @@ npm init
 # Dependencias
 
     npm install --save styled-components
+
+# Error
+
+    + "Error: ENOSPC: System limit for number of file watchers reached"
+
+    + "Solucão"
+
+        $ cat /proc/sys/fs/inotify/max_user_watches
+        $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        $ cat /proc/sys/fs/inotify/max_user_watches
