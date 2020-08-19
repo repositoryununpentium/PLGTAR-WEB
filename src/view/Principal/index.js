@@ -1,7 +1,14 @@
 import React from 'react';
+import * as STYLE from './style';
+
+import Header from '../../components/Header';
 
 function Principal() {
-    return <h2>PLGTAR</h2>
+    return (
+        <STYLE.Container>
+            <Header/>
+        </STYLE.Container>
+    )
 }
 
 export default Principal;
