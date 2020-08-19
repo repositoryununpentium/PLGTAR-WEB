@@ -4,6 +4,7 @@ import * as STYLE from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import FiltrosCard from '../../components/FiltrosCard';
+import TarefasCard from '../../components/TarefasCard';
 
 function Principal() {
     const [isFiltroAtivo, setSituacaoFiltroActivo] = useState();
@@ -29,6 +30,24 @@ function Principal() {
                     <FiltrosCard title='Ano' isAtivo={isFiltroAtivo === 'ano'} />
                 </button>
             </STYLE.AreaFiltro>
+
+            <STYLE.Titulo>
+                <h3>TAREFAS</h3>
+            </STYLE.Titulo>
+
+            <STYLE.Conteudo>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+                <TarefasCard/>
+            </STYLE.Conteudo>
+
         </STYLE.Container>
     )
 }

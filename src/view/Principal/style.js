@@ -15,3 +15,25 @@ export const AreaFiltro = styled.div`
         border: none;
     }
 `
+
+export const Conteudo = styled.div`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`
+
+export const Titulo = styled.div`
+    width: 100%;
+    border-bottom: 1px solid #20295F;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    h3 {
+        color:  #20295F;
+        position: relative;
+        top: 30px;
+        background: #FFFFFF;
+        padding: 0 16px;
+    }
+`
