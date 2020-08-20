@@ -18,3 +18,8 @@ npm init
         $ cat /proc/sys/fs/inotify/max_user_watches
         $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
         $ cat /proc/sys/fs/inotify/max_user_watches
+
+# Matar processo pela porta especifica
+
+    lsof -i :3000
+    kill -9 <PID>
