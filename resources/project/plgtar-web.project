@@ -8,6 +8,7 @@ npm init
 # Dependencias
 
     npm install --save styled-components
+    npm install axios
 
 # Error
 

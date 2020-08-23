@@ -4,7 +4,7 @@ import * as STYLE from './style';
 import logo from '../../assets/logo.png';
 import bell from '../../assets/bell.png';
 
-function Header() {
+function Header( {quantidadeTarefasAtrasadas, carregarTarefasAtrazadasNotificacao} ) {
     return (
         <STYLE.Container>
 
@@ -19,10 +19,10 @@ function Header() {
                     <span className="divisor"/>
                 <a href="#">SINCRONIZAR DISPOSITIVO</a>
                     <span className="divisor"/>
-                <a id="notificacao" href="#">
+                <button id="notificacao" onClick={carregarTarefasAtrazadasNotificacao}>
                     <img src={bell} alt="Notificação" />
-                    <span>5</span>
-                </a>
+                    <span>{quantidadeTarefasAtrasadas}</span>
+                </button>
             </STYLE.RightSide>
 
         </STYLE.Container>

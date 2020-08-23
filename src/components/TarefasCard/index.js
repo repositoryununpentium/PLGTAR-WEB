@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useMemo} from 'react';
+import { format } from 'date-fns';
 import * as STYLE from './style';
 
-import iconDefault from '../../assets/default.png';
+import tipoIcones from '../../utils/TipoIcones';
 
-function TarefasCard() {
+function TarefasCard({ categoria, titulo, dataHoraExecucao }) {
+    
+    const dataHoraExecucaoDataFormat = useMemo(() => format(new Date(dataHoraExecucao), 'dd/MM/yyyy'));
+    const dataHoraExecucaoHoraFormat = useMemo(() => format(new Date(dataHoraExecucao), 'HH:mm'));
+
     return (
         <STYLE.Container>
             <STYLE.TopCard>
-                <img src={iconDefault} alt="Ícone da tarefa" />
-                <h3>Título da Tarefa</h3>
+                <img src={tipoIcones[categoria]} alt="Ícone da tarefa" />
+                <h3>{titulo}</h3>
             </STYLE.TopCard>
             <STYLE.BottomCard>
-                <strong>19/08/2020</strong>
-                <span>16:15</span>
+                <strong>{dataHoraExecucaoDataFormat}</strong>
+                <span>{dataHoraExecucaoHoraFormat}</span>
             </STYLE.BottomCard>
         </STYLE.Container>
     )
