@@ -15,7 +15,15 @@ function Tarefas() {
     const [isFiltroAtivo, setSituacaoFiltroActivo] = useState('findall');
     const [tarefas, setTarefa] = useState([]);
     const [quantidadeTarefasAtrasadas, setQuantidadeTarefasAtrasadas] = useState();
-    const [tipoIcone, setTipoIcone] = useState();
+    const [categoria, setCategoria] = useState();
+
+    const [idTarefa, setIdTarefa] = useState();
+    const [isConcluido, setIsConcluido] = useState(false);
+    const [titulo, settitulo] = useState();
+    const [descricao, setdescricao] = useState();
+    const [dataHoraExecucao, setdataHoraExecucao] = useState();
+    const [horaTarefa, setHoraTarefa] = useState();
+    const [descricaoDispositivo, setDescricaoDispositivo] = useState('00:00:00:00:00:00');
 
     async function carregarTarefas() {
         if(isFiltroAtivo != 'findall') {
@@ -44,6 +52,19 @@ function Tarefas() {
         verificarQuantidadeTarefasAtrasadas();
     }, [isFiltroAtivo]);
 
+    // Salvar Tarefa
+    async function SalvarTarefa() {
+        await API.post('/tarefa',  {
+            descricaoDispositivo,
+            categoria,
+            titulo,
+            descricao,
+            dataHoraExecucao: `${dataHoraExecucao}T${horaTarefa}:00.000`
+        }).then(() => 
+            console.log("Tarefa Cadastrada com Sucesso!")
+        );
+    };
+
     return (
         <STYLE.Container>
             <Header quantidadeTarefasAtrasadas={quantidadeTarefasAtrasadas} carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
@@ -52,8 +73,8 @@ function Tarefas() {
                     {
                         TipoIcones.map((iconeMap, index) => (
                             index > 0 && 
-                            <button onClick={() => { setTipoIcone(index) }}>
-                                <img src={iconeMap} alt="Icone das tarefas" className={tipoIcone && tipoIcone != index && 'icone-inativo'} />
+                            <button onClick={() => { setCategoria(index) }}>
+                                <img src={iconeMap} alt="Icone das tarefas" className={categoria && categoria != index && 'icone-inativo'} />
                             </button>
                         ))
                     }
@@ -61,36 +82,36 @@ function Tarefas() {
 
                 <STYLE.Input>
                     <span>Título</span>
-                    <input type="text" placeholder="Título da tarefa"/>
+                    <input type="text" placeholder="Título da tarefa" onChange={event => settitulo(event.target.value)} value={titulo} />
                 </STYLE.Input>
 
                 <STYLE.TextArea>
                     <span>Descrição da tarefa</span>
-                    <textarea rows={5} placeholder="Detalhes da tarefa" />
+                    <textarea rows={5} placeholder="Detalhes da tarefa"  onChange={event => setdescricao(event.target.value)} value={descricao} />
                 </STYLE.TextArea>
 
                 <STYLE.Input>
                     <span>Data</span>
-                    <input type="date" placeholder="Data de execução da tarefa"/>
-                    <img src={iconeCalendario} alt="Calendário" />
+                    <input type="date" placeholder="Data de execução da tarefa"  onChange={event => setdataHoraExecucao(event.target.value)} value={dataHoraExecucao} />
+                    {/* <img src={iconeCalendario} alt="Calendário" /> */}
                 </STYLE.Input>
 
                 <STYLE.Input>
                     <span>Hora</span>
-                    <input type="time" placeholder="Hora de execução da tarefa"/>
-                    <img src={iconeRelogio} alt="Relógio" />
+                    <input type="time" placeholder="Hora de execução da tarefa"  onChange={event => setHoraTarefa(event.target.value)} value={horaTarefa} />
+                    {/* <img src={iconeRelogio} alt="Relógio" /> */}
                 </STYLE.Input>
 
                 <STYLE.Options>
                     <div>
-                        <input type="checkbox"/>
-                        <span>CONCLUÍDO</span>
+                        <input type="checkbox" checked={isConcluido} onChange={() => setIsConcluido(!isConcluido)} />
+                <span>CONCLUÍDO</span>
                     </div>
                     <button type="button">EXCLUIR</button>
                 </STYLE.Options>
 
                 <STYLE.SalvarTarefa>
-                    <button type="button">SALVAR</button>
+                    <button type="button" onClick={SalvarTarefa}>SALVAR</button>
                 </STYLE.SalvarTarefa>
 
             </STYLE.Formulario>
