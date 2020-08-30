@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as STYLE from './style';
 
 import { format } from 'date-fns';
+import { Redirect } from 'react-router-dom';
 
 import API from '../../service/api';
 
@@ -26,6 +27,8 @@ function Tarefas({match}) {
     const [dataHoraExecucao, setdataHoraExecucao] = useState();
     const [horaTarefa, setHoraTarefa] = useState();
     const [descricaoDispositivo, setDescricaoDispositivo] = useState('00:00:00:00:00:00');
+
+    const [isRedirecionarPagina, setIsRedirencionarPagina] = useState(false);
 
     async function carregarTarefas() {
         if(isFiltroAtivo != 'findall') {
@@ -66,19 +69,35 @@ function Tarefas({match}) {
 
     // Salvar Tarefa
     async function SalvarTarefa() {
-        await API.post('/tarefa',  {
-            descricaoDispositivo,
-            categoria,
-            titulo,
-            descricao,
-            dataHoraExecucao: `${dataHoraExecucao}T${horaTarefa}:00.000`
-        }).then(() => 
-            console.log("Tarefa Cadastrada com Sucesso!")
-        );
+        if(match.params.id) {
+            await API.put(`/tarefa/${match.params.id}`,  {
+                descricaoDispositivo,
+                categoria,
+                titulo,
+                descricao,
+                dataHoraExecucao: `${dataHoraExecucao}T${horaTarefa}:00.000`
+            }).then(() => 
+                setIsRedirencionarPagina(true)
+            );
+        } else {
+            await API.post('/tarefa',  {
+                descricaoDispositivo,
+                categoria,
+                titulo,
+                descricao,
+                dataHoraExecucao: `${dataHoraExecucao}T${horaTarefa}:00.000`
+            }).then(() => 
+                setIsRedirencionarPagina(true)
+            );
+        }
+        
     };
 
     return (
         <STYLE.Container>
+
+            { isRedirecionarPagina && <Redirect to="/" /> }
+
             <Header quantidadeTarefasAtrasadas={quantidadeTarefasAtrasadas} carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
             <STYLE.Formulario>
                 <STYLE.TipoIcones>
