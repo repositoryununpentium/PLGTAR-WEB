@@ -1,6 +1,8 @@
 import React from 'react';
 import * as STYLE from './style';
 
+import { Link } from 'react-router-dom';
+
 import logo from '../../assets/logo.png';
 import bell from '../../assets/bell.png';
 
@@ -13,9 +15,9 @@ function Header( {quantidadeTarefasAtrasadas, carregarTarefasAtrazadasNotificaca
             </STYLE.LeftSide>
 
             <STYLE.RightSide>
-                <a href="#">PRINCIPAL</a>
+                <Link to="/">PRINCIPAL</Link>
                     <span className="divisor"/>
-                <a href="#">NOVA TAREFA </a>
+                <Link to="tarefa">NOVA TAREFA</Link>
                     <span className="divisor"/>
                 <a href="#">SINCRONIZAR DISPOSITIVO</a>
                     <span className="divisor"/>

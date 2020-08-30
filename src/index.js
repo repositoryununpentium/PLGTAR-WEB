@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Principal from './view/Principal';
-import Tarefas from './view/Tarefas';
+import Routers from './routers';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Principal /> */}
-    <Tarefas />
+    <Routers />
   </React.StrictMode>,
   document.getElementById('root')
 );
