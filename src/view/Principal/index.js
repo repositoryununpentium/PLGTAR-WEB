@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as STYLE from './style';
+import { Link } from 'react-router-dom';
 
 import API from '../../service/api';
 
@@ -70,7 +71,9 @@ function Principal() {
             <STYLE.Conteudo>
                 {
                     tarefas.map(tarefaMap => (
-                    <TarefasCard categoria={tarefaMap.categoria} titulo={tarefaMap.titulo} dataHoraExecucao={tarefaMap.dataHoraExecucao} />
+                        <Link to={`/tarefa/${tarefaMap._id}`}>
+                            <TarefasCard categoria={tarefaMap.categoria} titulo={tarefaMap.titulo} dataHoraExecucao={tarefaMap.dataHoraExecucao} />
+                        </Link>
                     ))
                 }
             </STYLE.Conteudo>

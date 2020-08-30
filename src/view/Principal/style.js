@@ -21,6 +21,10 @@ export const Conteudo = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    a {
+        text-decoration: none;
+        color: #000000;
+    }
 `
 
 export const Titulo = styled.div`

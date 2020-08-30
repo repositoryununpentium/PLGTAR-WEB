@@ -10,6 +10,7 @@ export default function Routers() {
             <Switch>
                 <Route path="/" exact component={Principal} />
                 <Route path="/tarefa" exact component={Tarefas} />
+                <Route path="/tarefa/:id" exact component={Tarefas} />
             </Switch>
         </BrowserRouter>
     )

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as STYLE from './style';
 
+import { format } from 'date-fns';
+
 import API from '../../service/api';
 
 import Header from '../../components/Header';
@@ -10,7 +12,7 @@ import TipoIcones from '../../utils/TipoIcones';
 import iconeCalendario from '../../assets/calendar.png';
 import iconeRelogio from '../../assets/clock.png';
 
-function Tarefas() {
+function Tarefas({match}) {
 
     const [isFiltroAtivo, setSituacaoFiltroActivo] = useState('findall');
     const [tarefas, setTarefa] = useState([]);
@@ -19,7 +21,7 @@ function Tarefas() {
 
     const [idTarefa, setIdTarefa] = useState();
     const [isConcluido, setIsConcluido] = useState(false);
-    const [titulo, settitulo] = useState();
+    const [titulo, setTitulo] = useState();
     const [descricao, setdescricao] = useState();
     const [dataHoraExecucao, setdataHoraExecucao] = useState();
     const [horaTarefa, setHoraTarefa] = useState();
@@ -50,7 +52,17 @@ function Tarefas() {
     useEffect( () => {
         carregarTarefas();
         verificarQuantidadeTarefasAtrasadas();
+        carregarDetalhes();
     }, [isFiltroAtivo]);
+
+    async function carregarDetalhes() {
+        await API.get(`/tarefa/${match.params.id}`).then(response => {
+            setTitulo(response.data.titulo);
+            setdescricao(response.data.descricao);
+            setdataHoraExecucao(format(new Date(response.data.dataHoraExecucao), 'yyyy-MM-dd'));
+            setHoraTarefa(format(new Date(response.data.dataHoraExecucao), 'HH:mm'));
+        });
+    };
 
     // Salvar Tarefa
     async function SalvarTarefa() {
@@ -82,7 +94,7 @@ function Tarefas() {
 
                 <STYLE.Input>
                     <span>Título</span>
-                    <input type="text" placeholder="Título da tarefa" onChange={event => settitulo(event.target.value)} value={titulo} />
+                    <input type="text" placeholder="Título da tarefa" onChange={event => setTitulo(event.target.value)} value={titulo} />
                 </STYLE.Input>
 
                 <STYLE.TextArea>
