@@ -64,18 +64,33 @@ function Tarefas({match}) {
             setdescricao(response.data.descricao);
             setdataHoraExecucao(format(new Date(response.data.dataHoraExecucao), 'yyyy-MM-dd'));
             setHoraTarefa(format(new Date(response.data.dataHoraExecucao), 'HH:mm'));
+            setIsConcluido(response.data.isConcluido);
         });
     };
 
     // Salvar Tarefa
     async function SalvarTarefa() {
+
+        if(!categoria)
+            window.alert('A categoria da Tarefa é deve ser informada!');
+        else if(!titulo) {
+            window.alert('O título da Tarefa é deve ser informado!');
+        } else if(!descricao) {
+            window.alert('A descrição da Tarefa é deve ser informada!');
+        } else if(!dataHoraExecucao) {
+            window.alert('A descrição da Tarefa é deve ser informada!');
+        } else if(!horaTarefa) {
+            window.alert('A descrição da Tarefa é deve ser informada!');
+        }
+
         if(match.params.id) {
             await API.put(`/tarefa/${match.params.id}`,  {
                 descricaoDispositivo,
                 categoria,
                 titulo,
                 descricao,
-                dataHoraExecucao: `${dataHoraExecucao}T${horaTarefa}:00.000`
+                dataHoraExecucao: `${dataHoraExecucao}T${horaTarefa}:00.000`,
+                isConcluido
             }).then(() => 
                 setIsRedirencionarPagina(true)
             );

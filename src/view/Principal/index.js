@@ -72,7 +72,10 @@ function Principal() {
                 {
                     tarefas.map(tarefaMap => (
                         <Link to={`/tarefa/${tarefaMap._id}`}>
-                            <TarefasCard categoria={tarefaMap.categoria} titulo={tarefaMap.titulo} dataHoraExecucao={tarefaMap.dataHoraExecucao} />
+                            <TarefasCard categoria={tarefaMap.categoria} 
+                                         titulo={tarefaMap.titulo} 
+                                         dataHoraExecucao={tarefaMap.dataHoraExecucao} 
+                                         isConcluido={tarefaMap.isConcluido} />
                         </Link>
                     ))
                 }

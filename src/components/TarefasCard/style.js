@@ -15,6 +15,7 @@ export const Container = styled.div`
         opacity: 0.5;
         cursor: pointer;
     }
+    opacity: ${props => props.isConcluido ? 0.5 : 1};
 `
 
 export const TopCard = styled.div`

@@ -25,6 +25,7 @@ export const Conteudo = styled.div`
         text-decoration: none;
         color: #000000;
     }
+    margin-bottom: 80px;
 `
 
 export const Titulo = styled.div`
@@ -32,7 +33,7 @@ export const Titulo = styled.div`
     border-bottom: 1px solid #20295F;
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     h3 {
         color:  #20295F;
         position: relative;

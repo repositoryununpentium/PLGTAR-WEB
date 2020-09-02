@@ -4,13 +4,13 @@ import * as STYLE from './style';
 
 import tipoIcones from '../../utils/TipoIcones';
 
-function TarefasCard({ categoria, titulo, dataHoraExecucao }) {
+function TarefasCard({ categoria, titulo, dataHoraExecucao, isConcluido }) {
     
     const dataHoraExecucaoDataFormat = useMemo(() => format(new Date(dataHoraExecucao), 'dd/MM/yyyy'));
     const dataHoraExecucaoHoraFormat = useMemo(() => format(new Date(dataHoraExecucao), 'HH:mm'));
 
     return (
-        <STYLE.Container>
+        <STYLE.Container isConcluido={isConcluido}>
             <STYLE.TopCard>
                 <img src={tipoIcones[categoria]} alt="Ícone da tarefa" />
                 <h3>{titulo}</h3>
