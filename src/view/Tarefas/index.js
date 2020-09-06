@@ -69,7 +69,7 @@ function Tarefas({match}) {
         });
     };
 
-    // Salvar Tarefa
+    // Salvar/Alterar uma determinada Tarefa
     async function SalvarTarefa() {
 
         if(!categoria)
@@ -108,6 +108,15 @@ function Tarefas({match}) {
         }
         
     };
+
+    // Remover uma determinada tarefa
+    async function RemoverTarefa() {
+        const isConfirmarRemocaoTarefa = window.confirm('Deseja relmente remover essa tarefa?');
+        if(isConfirmarRemocaoTarefa == true) {
+            API.delete(`tarefa/${match.params.id}`).then(() => setIsRedirencionarPagina(true));
+            window.alert('Tarefa Removida com Sucesso!');
+        }
+    }
 
     return (
         <STYLE.Container>
@@ -152,9 +161,9 @@ function Tarefas({match}) {
                 <STYLE.Options>
                     <div>
                         <input type="checkbox" checked={isConcluido} onChange={() => setIsConcluido(!isConcluido)} />
-                <span>CONCLUÍDO</span>
+                    <span>CONCLUÍDO</span>
                     </div>
-                    <button type="button">EXCLUIR</button>
+                    { match.params.id && <button type="button" onClick={RemoverTarefa}>EXCLUIR</button>}
                 </STYLE.Options>
 
                 <STYLE.SalvarTarefa>
