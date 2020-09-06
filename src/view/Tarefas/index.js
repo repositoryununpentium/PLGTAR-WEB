@@ -65,6 +65,7 @@ function Tarefas({match}) {
             setdataHoraExecucao(format(new Date(response.data.dataHoraExecucao), 'yyyy-MM-dd'));
             setHoraTarefa(format(new Date(response.data.dataHoraExecucao), 'HH:mm'));
             setIsConcluido(response.data.isConcluido);
+            setCategoria(response.data.categoria);
         });
     };
 
