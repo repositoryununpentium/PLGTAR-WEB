@@ -19,7 +19,7 @@ function Header( {quantidadeTarefasAtrasadas, carregarTarefasAtrazadasNotificaca
                     <span className="divisor"/>
                 <Link to="tarefa">NOVA TAREFA</Link>
                     <span className="divisor"/>
-                <a href="#">SINCRONIZAR DISPOSITIVO</a>
+                <Link to="qrcode">SINCRONIZAR DISPOSITIVO</Link>
                     <span className="divisor"/>
                 <button id="notificacao" onClick={carregarTarefasAtrazadasNotificacao}>
                     <img src={bell} alt="Notificação" />
