@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import * as STYLE from './style';
-import { Link } from 'react-router-dom';
 
 import API from '../../service/api';
+import UsuarioValidation from '../../utils/UsuarioValidation';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -14,6 +15,7 @@ function Principal() {
     const [isFiltroAtivo, setSituacaoFiltroActivo] = useState('findall');
     const [tarefas, setTarefa] = useState([]);
     const [quantidadeTarefasAtrasadas, setQuantidadeTarefasAtrasadas] = useState();
+    const [isRedirecionarPagina, setIsRedirecionarPagina] = useState(false);
 
     async function carregarTarefas() {
         if(isFiltroAtivo != 'findall') {
@@ -33,10 +35,16 @@ function Principal() {
 
     useEffect( () => {
         carregarTarefas();
+        if(!UsuarioValidation) {
+            setIsRedirecionarPagina(true);
+        }
     }, [isFiltroAtivo]);
 
     return (
         <STYLE.Container>
+
+            { isRedirecionarPagina == true && <Redirect to="/qrcode" /> }
+
             <Header carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
             <Footer/>
             <STYLE.AreaFiltro>

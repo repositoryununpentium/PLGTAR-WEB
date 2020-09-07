@@ -7,6 +7,7 @@ import logo from '../../assets/logo.png';
 import bell from '../../assets/bell.png';
 
 import API from '../../service/api';
+import UsuarioValidation from '../../utils/UsuarioValidation';
 
 function Header( {carregarTarefasAtrazadasNotificacao} ) {
 
@@ -16,6 +17,11 @@ function Header( {carregarTarefasAtrazadasNotificacao} ) {
         await API.get(`/tarefa/filter/tarefas-atrasadas/00:00:00:00:00:00`).then( responseIndex => {
             setQuantidadeTarefasAtrasadas(responseIndex.data.length);
         });
+    };
+
+    async function SairSistema() {
+        localStorage.removeItem('@PLGTAR/QRCODE');
+        window.location.reload();
     };
 
     useEffect(() => {
@@ -34,7 +40,9 @@ function Header( {carregarTarefasAtrazadasNotificacao} ) {
                     <span className="divisor"/>
                 <Link to="tarefa">NOVA TAREFA</Link>
                     <span className="divisor"/>
-                <Link to="qrcode">SINCRONIZAR DISPOSITIVO</Link>
+                    { !UsuarioValidation ? 
+                        <Link to="qrcode">SINCRONIZAR DISPOSITIVO</Link> : 
+                        <button type="buttom" onClick={SairSistema}>SAIR</button> }
                 { quantidadeTarefasAtrasadas != 0 &&
                     <>
                         <span className="divisor"/>

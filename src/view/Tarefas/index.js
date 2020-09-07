@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { Redirect } from 'react-router-dom';
 
 import API from '../../service/api';
+import UsuarioValidation from '../../utils/UsuarioValidation';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -48,6 +49,9 @@ function Tarefas({match}) {
 
     useEffect( () => {
         carregarTarefas();
+        if(!UsuarioValidation) {
+            setIsRedirencionarPagina(true);
+        }
         carregarDetalhes();
     }, [isFiltroAtivo]);
 
