@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import * as STYLE from './style';
 
 import { Link } from 'react-router-dom';
@@ -6,7 +6,22 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import bell from '../../assets/bell.png';
 
-function Header( {quantidadeTarefasAtrasadas, carregarTarefasAtrazadasNotificacao} ) {
+import API from '../../service/api';
+
+function Header( {carregarTarefasAtrazadasNotificacao} ) {
+
+    const [quantidadeTarefasAtrasadas, setQuantidadeTarefasAtrasadas] = useState();
+
+    async function verificarQuantidadeTarefasAtrasadas() {
+        await API.get(`/tarefa/filter/tarefas-atrasadas/00:00:00:00:00:00`).then( responseIndex => {
+            setQuantidadeTarefasAtrasadas(responseIndex.data.length);
+        });
+    };
+
+    useEffect(() => {
+        verificarQuantidadeTarefasAtrasadas();
+    }, []);
+
     return (
         <STYLE.Container>
 

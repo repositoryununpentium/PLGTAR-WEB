@@ -41,12 +41,6 @@ function Tarefas({match}) {
             });
         }
     };
-    
-    async function verificarQuantidadeTarefasAtrasadas() {
-        await API.get(`/tarefa/filter/tarefas-atrasadas/00:00:00:00:00:00`).then( responseIndex => {
-            setQuantidadeTarefasAtrasadas(responseIndex.data.length);
-        });
-    };
 
     function carregarTarefasAtrazadasNotificacao() {
         setSituacaoFiltroActivo('tarefas-atrasadas');
@@ -54,7 +48,6 @@ function Tarefas({match}) {
 
     useEffect( () => {
         carregarTarefas();
-        verificarQuantidadeTarefasAtrasadas();
         carregarDetalhes();
     }, [isFiltroAtivo]);
 
@@ -123,7 +116,7 @@ function Tarefas({match}) {
 
             { isRedirecionarPagina && <Redirect to="/" /> }
 
-            <Header quantidadeTarefasAtrasadas={quantidadeTarefasAtrasadas} carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
+            <Header carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
             <STYLE.Formulario>
                 <STYLE.TipoIcones>
                     {

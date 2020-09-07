@@ -27,24 +27,17 @@ function Principal() {
         }
     };
 
-    async function verificarQuantidadeTarefasAtrasadas() {
-        await API.get(`/tarefa/filter/tarefas-atrasadas/00:00:00:00:00:00`).then( responseIndex => {
-            setQuantidadeTarefasAtrasadas(responseIndex.data.length);
-        });
-    };
-
     function carregarTarefasAtrazadasNotificacao() {
         setSituacaoFiltroActivo('tarefas-atrasadas');
     };
 
     useEffect( () => {
         carregarTarefas();
-        verificarQuantidadeTarefasAtrasadas();
     }, [isFiltroAtivo]);
 
     return (
         <STYLE.Container>
-            <Header quantidadeTarefasAtrasadas={quantidadeTarefasAtrasadas} carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
+            <Header carregarTarefasAtrazadasNotificacao={carregarTarefasAtrazadasNotificacao} />
             <Footer/>
             <STYLE.AreaFiltro>
                 <button type='button' onClick={ () =>  setSituacaoFiltroActivo('findall')}>
