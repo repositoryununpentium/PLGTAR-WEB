@@ -20,11 +20,15 @@ function Header( {quantidadeTarefasAtrasadas, carregarTarefasAtrazadasNotificaca
                 <Link to="tarefa">NOVA TAREFA</Link>
                     <span className="divisor"/>
                 <Link to="qrcode">SINCRONIZAR DISPOSITIVO</Link>
-                    <span className="divisor"/>
-                <button id="notificacao" onClick={carregarTarefasAtrazadasNotificacao}>
-                    <img src={bell} alt="Notificação" />
-                    <span>{quantidadeTarefasAtrasadas}</span>
-                </button>
+                { quantidadeTarefasAtrasadas != 0 &&
+                    <>
+                        <span className="divisor"/>
+                        <button id="notificacao" onClick={carregarTarefasAtrazadasNotificacao}>
+                            <img src={bell} alt="Notificação" />
+                            <span>{quantidadeTarefasAtrasadas}</span>
+                        </button>
+                    </>
+                }
             </STYLE.RightSide>
 
         </STYLE.Container>
