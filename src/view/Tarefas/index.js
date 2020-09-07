@@ -27,13 +27,13 @@ function Tarefas({match}) {
     const [descricao, setdescricao] = useState();
     const [dataHoraExecucao, setdataHoraExecucao] = useState();
     const [horaTarefa, setHoraTarefa] = useState();
-    const [descricaoDispositivo, setDescricaoDispositivo] = useState('00:00:00:00:00:00');
+    const [descricaoDispositivo, setDescricaoDispositivo] = useState(UsuarioValidation);
 
     const [isRedirecionarPagina, setIsRedirencionarPagina] = useState(false);
 
     async function carregarTarefas() {
         if(isFiltroAtivo != 'findall') {
-            await API.get(`/tarefa/filter/${isFiltroAtivo}/00:00:00:00:00:00`).then( responseIndex => {
+            await API.get(`/tarefa/filter/${isFiltroAtivo}/$(UsuarioValidation)`).then( responseIndex => {
                 setTarefa(responseIndex.data);
             });
         } else {
@@ -83,7 +83,7 @@ function Tarefas({match}) {
 
         if(match.params.id) {
             await API.put(`/tarefa/${match.params.id}`,  {
-                descricaoDispositivo,
+                descricaoDispositivo: UsuarioValidation,
                 categoria,
                 titulo,
                 descricao,
@@ -94,7 +94,7 @@ function Tarefas({match}) {
             );
         } else {
             await API.post('/tarefa',  {
-                descricaoDispositivo,
+                descricaoDispositivo: UsuarioValidation,
                 categoria,
                 titulo,
                 descricao,

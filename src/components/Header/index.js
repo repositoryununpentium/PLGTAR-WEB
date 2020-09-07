@@ -14,7 +14,7 @@ function Header( {carregarTarefasAtrazadasNotificacao} ) {
     const [quantidadeTarefasAtrasadas, setQuantidadeTarefasAtrasadas] = useState();
 
     async function verificarQuantidadeTarefasAtrasadas() {
-        await API.get(`/tarefa/filter/tarefas-atrasadas/00:00:00:00:00:00`).then( responseIndex => {
+        await API.get(`/tarefa/filter/tarefas-atrasadas/$(UsuarioValidation)`).then( responseIndex => {
             setQuantidadeTarefasAtrasadas(responseIndex.data.length);
         });
     };

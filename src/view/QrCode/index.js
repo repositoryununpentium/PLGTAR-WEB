@@ -12,9 +12,13 @@ function QrCode() {
     const [isRedirecionarPaginaPrincipal, setisRedirecionarPaginaPrincipal] = useState(false);
 
     async function SalvarCodigoQRCode() {
-        await localStorage.setItem('@PLGTAR/QRCODE', macaddress);
-        setisRedirecionarPaginaPrincipal(true);
-        window.location.reload();
+        if(!macaddress) {
+            alert('Código Inválido, tente novamente!');
+        } else {
+            await localStorage.setItem('@PLGTAR/QRCODE', macaddress);
+            setisRedirecionarPaginaPrincipal(true);
+            window.location.reload();
+        }
     }
 
     return(

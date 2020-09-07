@@ -19,7 +19,7 @@ function Principal() {
 
     async function carregarTarefas() {
         if(isFiltroAtivo != 'findall') {
-            await API.get(`/tarefa/filter/${isFiltroAtivo}/00:00:00:00:00:00`).then( responseIndex => {
+            await API.get(`/tarefa/filter/${isFiltroAtivo}/$(UsuarioValidation)`).then( responseIndex => {
                 setTarefa(responseIndex.data);
             });
         } else {
